@@ -66,7 +66,7 @@
     <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 text-center">
         <div class="card embed-responsive">
             <div class="card-body">
-                <img src="img/background2.png" class="img-fluid" alt="Fondo de cumpleaños">
+                <img src="img/background2.png" style="opacity: 80%;" class="img-fluid" alt="Fondo de cumpleaños">
             </div>
         </div>
         <div class="mt-4">
@@ -97,9 +97,9 @@
             setTimeout(scrollTitle, 250);
         }
         scrollTitle();
-        var code = window.prompt("Hola Patricia. Espero que estés teniendo un día maravilloso. ¡Feliz cumpleaños! 🎉🎂🎈🎁", "Introduce el código");
+        var code = window.prompt("Hola Patricia\nIntroduce el código:");
         if (code == "Patricia2025") {
-            document.querySelector('h1').textContent = "¡Feliz cumpleaños Patricia! 🎉🎂🎈🎁";
+            window.alert("¡Felicidades Patricia! 🎉🎂🎈🎁");
         } else {
             window.alert("El código introducido es incorrecto. Por favor, inténtalo de nuevo.");
             window.location.reload();
