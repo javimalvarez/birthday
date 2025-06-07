@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz cumpleaños Patricia 🎉🎂🎈🎁</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
@@ -41,6 +40,23 @@
         footer{
           color: white;
         }
+        body {
+            background-color: #f0f8ff;
+        }
+        .flower {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            left: 0;
+            top: -60px; /* Empieza fuera de la pantalla */
+            animation: caer 5s linear forwards;
+            pointer-events: none;
+        }
+        @keyframes caer {
+            0% { transform: translateY(0) rotate(0deg);}
+            100% { transform: translateY(110vh) rotate(360deg);}
+        }
+
         .embed-responsive {
             position: relative;
             height: auto;
@@ -59,7 +75,7 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <img src="img/Happy Birthday.gif" class="img-fluid" alt="Celebración de cumpleaños">
     </header>
@@ -104,6 +120,17 @@
             window.alert("El código introducido es incorrecto. Por favor, inténtalo de nuevo.");
             window.location.reload();
         }
+        function makeFlower() {
+            const flower = document.createElement('img');
+            flower.src = 'img/flower.png'; // Reemplaza con la imagen de la flor
+            flower.classList.add('flower');
+            flower.style.left = Math.random() * (window.innerWidth -50) + 'px'; // Resta el ancho de la flor para que no se salga
+            flower.style.top = window.scrollY - 60 + 'px'; // Aparecen siempre en la parte superior visible
+            flower.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Duración entre 4 y 7 segundos
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 4000);
+        }
+        setInterval(makeFlower, 500);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="scripts/simplescrollup.js"></script>
