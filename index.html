@@ -38,15 +38,25 @@
             transform: translateX(100px);
         }
         footer{
-          color: white;
+            color: white;
+            background-color: #181818;
+            padding: 10px 0;
         }
         body {
             background-color: #f0f8ff;
         }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        a:hover{
+            color: #ffcc00;
+        }
+
         .flower {
             position: absolute;
-            width: 32px;
-            height: 32px;
+            width: 64px;
+            height: 64px;
             left: 0;
             top: -60px; /* Empieza fuera de la pantalla */
             animation: caer 5s linear forwards;
@@ -86,11 +96,14 @@
             </div>
         </div>
         <div class="mt-4">
-            <marquee behavior="scroll" bgcolor="black" direction="left" style="font-family: 'Courier New', Courier, monospace; color: white; max-width: 50%; opacity: 70%;">Los Planetas - Cumpleaños Total</marquee>
-            <audio autoplay muted controls loop playsinline>
-                <source src="audio/Cumpleaños Total.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
+            <figure class="text-center">
+                <figcaption class="text-center mb-3" style="color: white; font-weight: bolder;">America Authors - Best Day Of My Life</figcaption>
+                <audio autoplay muted controls loop playsinline>
+                    <source src="audio/American Authors - Best Day Of My Life.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </figure>
+            
         </div>
         <div class="mt-4">
             <a href="#up" class="simplescrollup__button simplescrollup__button--hide">
@@ -102,7 +115,8 @@
     </div>
     <footer class="mt-auto text-center py-3 bg-dark">
         <div class="container">
-          <div> © 2025 Esta página fue creada por Francisco Javier Martínez Álvarez</div>
+            <div> © 2025 Página creada y diseñada por <a href="https://github.com/javimalvarez" target="_blank">Javier Martínez</a></div>
+            <div><img src="img/github_logo.svg" style="width: 16px; height: auto;"/>&nbsp&nbspPágina web alojada en <a href="https://github.com" target="_blank">Gihub</a></div>
         </div>
     </footer>
     <script>
@@ -113,20 +127,40 @@
             setTimeout(scrollTitle, 250);
         }
         scrollTitle();
-        var code = window.prompt("Hola Patricia\nIntroduce el código:");
-        if (code == "Patricia2025") {
-            window.alert("¡Para ti. Felicidades Patricia! 🎉🎂🎈🎁");
-        } else {
-            window.alert("El código introducido es incorrecto. Por favor, inténtalo de nuevo.");
-            window.location.reload();
-        }
+        window.alert("Para la mejor amiga y persona del mundo\n¡Feliz cumpleaños Patricia! 🎉🎂🎈🎁");
+        // Mostrar el botón de desplazamiento hacia arriba después de 200px de desplazamiento
+        window.addEventListener('scroll', function() {
+            const button = document.querySelector('.simplescrollup__button');
+            if (window.scrollY > 200) {
+                button.classList.remove('simplescrollup__button--hide');
+                button.classList.add('simplescrollup__button--show');
+            } else {
+                button.classList.remove('simplescrollup__button--show');
+                button.classList.add('simplescrollup__button--hide');
+            }
+        });
+        // Crear flores que caen desde la parte superior de la pantalla
+        // Evitar que aparezcan en el centro de la pantalla
         function makeFlower() {
             const flower = document.createElement('img');
-            flower.src = 'img/flower.png'; // Reemplaza con la imagen de la flor
+            const flowerImages = ['img/flower.png', 'img/sunflower.png'];
+            flower.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
             flower.classList.add('flower');
-            flower.style.left = Math.random() * (window.innerWidth -50) + 'px'; // Resta el ancho de la flor para que no se salga
-            flower.style.top = window.scrollY - 60 + 'px'; // Aparecen siempre en la parte superior visible
-            flower.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Duración entre 4 y 7 segundos
+
+            // Definir la franja central a evitar (por ejemplo, el 30% central)
+            const avoidStart = window.innerWidth * 0.235;
+            const avoidEnd = window.innerWidth * 0.765;
+            let left;
+            let valid = false;
+            while (!valid) {
+                left = Math.random() * (window.innerWidth - 64); // 64 = ancho de la flor
+                if (left + 64 < avoidStart || left > avoidEnd) {
+                    valid = true;
+                }
+            }
+            flower.style.left = left + 'px';
+            flower.style.top = window.scrollY - 60 + 'px';
+            flower.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(flower);
             setTimeout(() => flower.remove(), 4000);
         }
